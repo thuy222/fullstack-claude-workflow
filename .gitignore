@@ -1,0 +1,47 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+**/node_modules
+/.pnp
+.pnp.*
+
+# builds / output
+**/dist
+client/.next/
+client/out/
+client/build
+
+# next.js dev cache
+client/.next/dev
+
+# testing / coverage
+**/coverage
+
+# prisma generated client (regenerated via `prisma generate`)
+server/node_modules/.prisma
+server/generated
+
+# env files (commit .env.example only)
+**/.env
+**/.env.*
+!**/.env.example
+
+# misc
+.DS_Store
+*.pem
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# vercel
+.vercel
+
+# claude code (local, machine-specific settings)
+.claude/settings.local.json
+
+# typescript
+*.tsbuildinfo
+client/next-env.d.ts

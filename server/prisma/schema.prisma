@@ -1,0 +1,21 @@
+// Prisma schema — https://pris.ly/d/prisma-schema
+// Prisma 7 uses the `prisma-client` generator (TypeScript client emitted to
+// ./generated/prisma). Run `npx prisma generate` after changing this file and
+// `npx prisma migrate dev --name <name>` to create/apply migrations.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
