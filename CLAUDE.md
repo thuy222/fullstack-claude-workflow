@@ -22,11 +22,19 @@ app (`npm --prefix client …` / `npm --prefix server …`) or from within the f
 ## Shared Claude config (`.claude/`)
 
 `.claude/` is shared across both apps:
-- **`agents/review-code.md`** — front-end reviewer (Next/React/MUI).
-- **`agents/review-server.md`** — back-end reviewer (NestJS/Prisma).
-- **`skills/`** — `create-component` (writes to `client/components/`), `create-spec`.
+- **Review agents:**
+  - `agents/review-react-code.md` — front-end reviewer (Next/React/MUI).
+  - `agents/review-server.md` — back-end code reviewer (NestJS/Prisma).
+  - `agents/review-architecture.md` — structure/boundaries reviewer across the monorepo.
+  - `agents/review-db-design.md` — Prisma schema & migration reviewer.
+- **`skills/`** — `react-component` (scaffolds into `client/components/`), `generate-spec`
+  (writes feature specs into the repo-root `specs/`), `database-design` (designs/evolves the
+  server's Prisma schema + migration).
 - **`settings.json`** — a `PostToolUse` hook runs Prettier on edited files; it resolves the nearest
   config (`client/.prettierrc` or `server/.prettierrc`), so per-app formatting just works.
+
+Feature specifications live in **`specs/`** at the repo root; their structure is defined by
+`specs/template.md` (scaffold or update one with the `generate-spec` skill).
 
 ## Root commands
 

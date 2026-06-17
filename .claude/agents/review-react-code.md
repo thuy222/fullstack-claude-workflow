@@ -1,5 +1,5 @@
 ---
-name: review-code
+name: review-react-code
 description: Reviews frontend code (React 19 / Next.js 16 / MUI) for accessibility, Server-vs-Client (RSC) boundaries, React quality, and reuse/duplication. Use when asked to review frontend code, a component, or the current diff. Read-only — reports findings, does not edit.
 tools: Read, Grep, Glob, Bash
 ---
