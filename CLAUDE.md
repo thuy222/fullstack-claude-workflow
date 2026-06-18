@@ -30,7 +30,8 @@ app (`npm --prefix client …` / `npm --prefix server …`) or from within the f
 - **`skills/`** — `react-component` (scaffolds into `client/components/`), `generate-spec`
   (writes feature specs into the repo-root `specs/`), `database-design` (designs/evolves the
   server's Prisma schema + migration), `write-test` (generates unit + e2e tests from a spec, for
-  the client or server).
+  the client or server), `html-to-react` (converts an HTML file into reusable React, reusing
+  existing components + theme tokens and binding inputs with React Hook Form).
 - **`settings.json`** — a `PostToolUse` hook runs Prettier on edited files; it resolves the nearest
   config (`client/.prettierrc` or `server/.prettierrc`), so per-app formatting just works.
 

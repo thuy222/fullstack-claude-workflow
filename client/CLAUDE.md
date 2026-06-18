@@ -42,6 +42,11 @@ npm run lint    # run ESLint
   and an `@theme inline` block. There is no `tailwind.config.*` file; theme tokens (colors, fonts)
   are declared in CSS. PostCSS uses `@tailwindcss/postcss` (`postcss.config.mjs`).
 - **MUI** is used for components (`@mui/material`, theming via `theme.ts` + `components/ThemeRegistry.tsx`).
+- **Reusable components** live in `client/components/` (built on MUI; see the `react-component` skill).
+  Don't hard-code colors — use theme tokens (`sx` / Tailwind `@theme`), adding a token to `theme.ts`
+  when one is missing. **Forms bind inputs with React Hook Form** behind reusable field wrappers
+  (`InputControl`, `SelectControl`). Turn an HTML file/mockup into React with the **`html-to-react`**
+  skill (reuses existing components, binds via RHF, can satisfy `write-test`-generated tests).
 - **TypeScript** is strict; the `@/*` path alias maps to the **client root** (`tsconfig.json`).
 - **ESLint** uses the flat-config format (`eslint.config.mjs`) composing
   `eslint-config-next/core-web-vitals` and `eslint-config-next/typescript`.
