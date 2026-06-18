@@ -16,15 +16,19 @@ client/.next/dev
 
 # testing / coverage
 **/coverage
+client/playwright-report/
+client/test-results/
+client/blob-report/
 
 # prisma generated client (regenerated via `prisma generate`)
 server/node_modules/.prisma
 server/generated
 
-# env files (commit .env.example only)
+# env files (commit *.example only)
 **/.env
 **/.env.*
 !**/.env.example
+!**/.env.test.example
 
 # misc
 .DS_Store

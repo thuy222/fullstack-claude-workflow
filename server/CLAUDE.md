@@ -45,6 +45,24 @@ npx prisma migrate dev --name <name>   # create + apply a migration (dev)
 npx prisma migrate deploy  # apply migrations (prod / CI)
 ```
 
+## Testing
+
+**Jest + Supertest** (NestJS default). Generate tests from a spec with the **`write-test`** skill.
+
+- **Unit** (`*.spec.ts`, next to the source): build modules with `Test.createTestingModule` and
+  **mock the DB** — never hit Postgres. Use the deep Prisma mock:
+  `import { createPrismaMock } from '@app/prisma/testing/prisma.mock'` and provide it as
+  `{ provide: PrismaService, useValue: mock }`. Run with `npm run test` (no DB required).
+- **E2e** (`apps/api/test/*.e2e-spec.ts`): boot `AppModule` and drive HTTP with Supertest against a
+  **dedicated ephemeral test Postgres** (`db-test` in `docker-compose.yml`, port 5434, tmpfs). Connection
+  string in `.env.test` (copy from `.env.test.example`). Reset state with `truncateAll(prisma)`
+  (`apps/api/test/db-utils.ts`) in `beforeEach`. Migrations are applied automatically by the Jest
+  `globalSetup` (`apps/api/test/setup-e2e.ts`). Run: `npm run db:test:up` **then** `npm run test:e2e`.
+- The e2e jest config (`apps/api/test/jest-e2e.json`) maps `@app/*` and strips `.js` from the generated
+  Prisma client's imports; `test:e2e` sets `NODE_OPTIONS=--experimental-vm-modules` so Prisma 7's client
+  can load its WASM query compiler under Jest. The schema's generator uses `moduleFormat = "cjs"` so the
+  generated client loads in both Jest and the webpack build — don't switch it back to ESM.
+
 ## Database / Docker
 
 - `docker compose up -d db` starts Postgres on `:5432` (creds in `docker-compose.yml`, db `app`).

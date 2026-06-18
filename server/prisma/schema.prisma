@@ -4,8 +4,12 @@
 // `npx prisma migrate dev --name <name>` to create/apply migrations.
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  // Emit a CommonJS client. The default ESM output uses `import.meta`, which
+  // ts-jest's CommonJS VM can't load; CJS works in both jest and the webpack
+  // build. See server/CLAUDE.md (Prisma 7 notes) and the webpack extensionAlias.
+  moduleFormat = "cjs"
 }
 
 datasource db {

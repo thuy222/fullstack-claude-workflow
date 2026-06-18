@@ -21,7 +21,18 @@ npm run start   # serve the production build
 npm run lint    # run ESLint
 ```
 
-There is no test setup in this app yet.
+## Testing
+
+- **Unit / component:** **Vitest + React Testing Library + jsdom**. Test files are `*.test.tsx`,
+  colocated next to the code. Import render helpers from **`@/test/test-utils`** (wraps the MUI theme
+  provider), not `@testing-library/react` directly. Config: `vitest.config.mts` + `vitest.setup.ts`.
+- **E2e:** **Playwright**. Specs live in `e2e/*.spec.ts`; config `playwright.config.ts` builds and
+  serves the production app on `:3000`. First run needs `npm exec playwright install` (downloads
+  browsers).
+- **Async Server Components:** cover with **e2e**, not Vitest — Vitest can't render them (see the
+  bundled guide `node_modules/next/dist/docs/01-app/02-guides/testing/{vitest,playwright}.md`).
+- **Commands:** `npm run test` (unit, single run) · `npm run test:watch` · `npm run test:e2e`.
+- Generate tests from a spec with the **`write-test`** skill.
 
 ## Architecture
 

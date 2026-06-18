@@ -1,6 +1,7 @@
 ---
 name: database-design
 description: Design or evolve the server's Prisma data model (PostgreSQL) following project conventions, then regenerate the client and create a migration. Use when adding or changing models, tables, relations, indexes, or enums in server/prisma/schema.prisma.
+argument-hint: <model or schema change to design>
 ---
 
 # database-design

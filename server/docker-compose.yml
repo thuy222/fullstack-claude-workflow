@@ -16,6 +16,26 @@ services:
       timeout: 5s
       retries: 5
 
+  # Ephemeral Postgres for e2e tests (`npm run test:e2e`). Data lives in tmpfs,
+  # so it's wiped on every container restart. Exposed on :5434 to avoid clashing
+  # with the dev `db` on :5432. Connection string lives in `.env.test`.
+  db-test:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app_test
+    ports:
+      - "5434:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d app_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   api:
     build:
       context: .

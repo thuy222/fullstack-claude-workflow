@@ -29,7 +29,8 @@ app (`npm --prefix client …` / `npm --prefix server …`) or from within the f
   - `agents/review-db-design.md` — Prisma schema & migration reviewer.
 - **`skills/`** — `react-component` (scaffolds into `client/components/`), `generate-spec`
   (writes feature specs into the repo-root `specs/`), `database-design` (designs/evolves the
-  server's Prisma schema + migration).
+  server's Prisma schema + migration), `write-test` (generates unit + e2e tests from a spec, for
+  the client or server).
 - **`settings.json`** — a `PostToolUse` hook runs Prettier on edited files; it resolves the nearest
   config (`client/.prettierrc` or `server/.prettierrc`), so per-app formatting just works.
 
@@ -44,6 +45,15 @@ npm run dev:client   # Next.js → http://localhost:3000
 npm run dev:server   # NestJS  → http://localhost:3001
 npm run build        # build both
 npm run db:up        # start Postgres (docker compose)
+
+npm run test         # unit tests for both apps (client Vitest + server Jest)
+npm run test:client  # client unit/component (Vitest)
+npm run test:server  # server unit (Jest; mocked Prisma, no DB)
+npm run test:e2e:client   # client e2e (Playwright; builds + serves the app)
+npm run test:e2e:server   # server e2e (Supertest; needs the test DB — see below)
 ```
 
-There is no repo-wide test setup yet.
+**Testing stacks** (details in each app's `CLAUDE.md`): client uses **Vitest + RTL** (unit/component)
+and **Playwright** (e2e); server uses **Jest + Supertest** — unit tests mock `PrismaService`, e2e runs
+against a dedicated ephemeral test Postgres (`npm --prefix server run db:test:up` first). Write tests
+from a spec with the **`write-test`** skill.

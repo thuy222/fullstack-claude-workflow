@@ -1,6 +1,7 @@
 ---
 name: react-component
 description: Scaffold a reusable React component (e.g. InputControl, Button, Card) into the client/components/ folder, built on Material UI. Use when the user asks to create, scaffold, or add a reusable UI component.
+argument-hint: <ComponentName> [prop:type ...]
 ---
 
 # react-component
