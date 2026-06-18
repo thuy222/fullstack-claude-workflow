@@ -17,9 +17,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id    String  @id @default(uuid())
+  email String  @unique
+  name  String?
+  // bcrypt/argon2id hash of the password — never returned by the API (the
+  // "safe user" object omits it). VarChar(255) comfortably fits bcrypt (60) and
+  // argon2id (~96+) outputs. Required: every user authenticates with a password.
+  passwordHash String   @db.VarChar(255)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
